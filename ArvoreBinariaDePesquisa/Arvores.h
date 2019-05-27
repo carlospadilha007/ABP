@@ -26,7 +26,7 @@ void exibeMenu();
 //Funções Padrão
 void inicializa(TNo** ptr);
 void insere(TNo** ptr, TipoAluno item);
-void retira(TNo** ptr, TipoAluno item);
+void retira(TNo** ptr, TipoAluno *item);
 void antecessor(TNo* q, TNo** r);
 void sucessor(TNo* q, TNo** r);
 void pesquisa(TNo* ptr, TipoAluno item);

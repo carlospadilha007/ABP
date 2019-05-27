@@ -24,14 +24,14 @@ void insere(TNo** ptr, TipoAluno item) {
 	}
 }
 
-void retira(TNo** ptr, TipoAluno item) {
+void retira(TNo** ptr, TipoAluno *item) {
 	if ((*ptr) == NULL) {
-		printf("\nA chave #%d não esta na arvore!", item.RA);
+		printf("\nA chave #%d não esta na arvore!", item->RA);
 	}
-	else if (item.RA < (*ptr)->item.RA) {
+	else if (item->RA < (*ptr)->item.RA) {
 		retira(&(*ptr)->esq, item);
 	}
-	else if (item.RA > (*ptr)->item.RA) {
+	else if (item->RA > (*ptr)->item.RA) {
 		retira(&(*ptr)->dir, item);
 	}
 	else {

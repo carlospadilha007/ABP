@@ -17,14 +17,46 @@ int main() {
 		if (op == 0) {
 			break;
 		}
-		leNo(&item);
-		insere(&raiz, item);
+		switch (op)
+		{
+		case 1: {
+			printf("\nDigite o RA ser Inserido: ");
+			leNo(&item);
+			insere(&raiz, item);
+			break;
+		}
+		case 2: {
+			printf("\nDigite o RA ser retirado: ");
+			leNo(&item);
+			retira(&raiz, &item);
+			break;
+		}
+		case 3: {
+			printf("\nDigite o RA ser pesquisado: ");
+			leNo(&item);
+			pesquisa(raiz, item);
+			break;
+		}
+		case 4: {
+			in_ordem(raiz);
+			system("pause");
+			break;
+		}
+		case 5: {
+			pre_ordem(raiz);
+			system("pause");
+			break;
+		}
+		case 6: {
+			pos_ordem(raiz);
+			system("pause");
+			break;
+		}
+			default:
+				printf("\nO opçãp invalida!");
+				break;
+		}
 	}
-	printf("Digite o codigo (busca pai): ");
-    fflush(stdin);
-	scanf("%d", &item.RA);
-	buscaIrmao(raiz, item);
-	pre_ordem(raiz);
     system("pause");
 	return 0;
 }
