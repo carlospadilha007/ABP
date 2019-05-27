@@ -3,15 +3,16 @@
 #include <stdlib.h>
 #include "Arvores.h"
 
-int buscaPai(TNo* ptr, TipoAluno item) {
+void buscaPai(TNo* ptr, TipoAluno item) {
 	TNo* ant = NULL;
 	if (ptr->item.RA == item.RA) {
-		return 0;
+		printf("\nÉ a raiz, logo não possui pai!");
 	}
 	ant = ptr;
 	while ((ptr != NULL) && (ptr->item.RA != item.RA)) {
 		if (item.RA == ptr->item.RA) {
-			return ant->item.RA;
+			printf("\nO seu pai é #%d ", ant->item.RA);
+			return;
 		}
 		else if (item.RA > ptr->item.RA) {
 			ant = ptr;
@@ -22,72 +23,65 @@ int buscaPai(TNo* ptr, TipoAluno item) {
 			ptr = ptr->esq;
 		}
 	}
+	printf("\nNão esta na arvore!");
 
-	free(ant);
-	return -1;
 }
 
-int buscaIrmao(TNo* ptr, TipoAluno item) {
+void buscaIrmao(TNo* ptr, TipoAluno item) {
 	TNo* ant = NULL;
-	int esq, dir;
-	esq = dir = 0;
 	if (ptr->item.RA == item.RA) {
-		return 0;
+		printf("\nNão possui irmãos, visto que é a raiz!");
 	}
+	ant = ptr;
 	while ((ptr != NULL) && (ptr->item.RA != item.RA)) {
+		if (ptr->item.RA == item.RA) {
+			if (ptr->item.RA > item.RA) {
+				if (ant->dir == NULL) {
+					printf("\nNão possui irmãos!");
+					return;
+				}
+				else
+				{
+					printf("\nO seu irmão é: #%d", ant->dir->item.RA);
+					return;
+				}
+			}
+			else {
+				if (ant->esq == NULL) {
+					printf("\nNão possui irmãos!");
+					return;
+				}
+				else
+				{
+					printf("\nO seu irmão é: #%d", ant->esq->item.RA);
+					return;
+				}
+			}
+		}
 		if (item.RA > ptr->item.RA) {
 			ant = ptr;
 			ptr = ptr->dir;
-			esq = 1;
-			dir = 0;
+			
 		}
 		else {
 			ant = ptr;
 			ptr = ptr->esq;
-			dir = 1;
-			esq = 0;
 		}
 	}
-	if (esq == 1) {
-		if (ant->dir == NULL) {
-			return -1;
-		}
-		else
-		{
-			ant = ant->dir;
-			return ant->item.RA;
-		}
-	}
-	else {
-		if (ant->esq == NULL) {
-			return -1;
-		}
-		else
-		{
-			ant = ant->esq;
-			return ant->item.RA;
-		}
-	}
-	free(ant);
+	printf("Não esta na arvore!");
 
 }
 
 void escreveNo(TipoAluno item) {
 		//printf("\nNome: %s ", item.nome);
-		printf("\nCodigo: %d ", item.RA);
-		/*printf("\nCPF: %d ", item.CPF);
 		printf("\nRA: %d ", item.RA);
-		printf("\nData de Nascimento: %s ", item.dataDeNascimento);
-		printf("\nSexo: %s ", item.sexo);*/
+		//printf("\nData de Nascimento: %s ", item.dataDeNascimento);
 }
 void leNo(TipoAluno* item) {
 	fflush(stdin);
 	//printf("\nNome: "); fflush(stdin); scanf("%s", &item->nome);
-	printf("Codigo: "); fflush(stdin); scanf("%d", &item->RA);
-	/*printf("CPF: "); fflush(stdin); scanf("%d", &item->CPF);
 	printf("RA: "); fflush(stdin); scanf("%d", &item->RA);
-	printf("Data de Nascimento: "); fflush(stdin), scanf("%s", &item->dataDeNascimento);
-	printf("Sexo: "); fflush(stdin);  scanf("%s", &item->sexo);*/
+	//printf("Data de Nascimento: "); fflush(stdin), scanf("%s", &item->dataDeNascimento);
 }
 void exibeMenu() {
 	system("cls");

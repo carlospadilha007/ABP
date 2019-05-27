@@ -17,8 +17,8 @@ typedef struct no
 
 
 //Funções de manipulação
-int buscaPai(TNo* ptr, TipoAluno item);
-int buscaIrmao(TNo* ptr, TipoAluno item);
+void buscaPai(TNo* ptr, TipoAluno item);
+void buscaIrmao(TNo* ptr, TipoAluno item);
 void escreveNo(TipoAluno item);
 void leNo(TipoAluno* item);
 void exibeMenu();

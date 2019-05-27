@@ -20,10 +20,10 @@ int main() {
 		leNo(&item);
 		insere(&raiz, item);
 	}
-	printf("Digite o codigo a ser pesquisado: ");
+	printf("Digite o codigo (busca pai): ");
     fflush(stdin);
 	scanf("%d", &item.RA);
-	pesquisa(raiz, item);
+	buscaIrmao(raiz, item);
 	pre_ordem(raiz);
     system("pause");
 	return 0;
