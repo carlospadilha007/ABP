@@ -1,17 +1,19 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include "Arvores.h"
 
-int buscaPai(TNo* ptr, int chave) {
-	TNo* ant;
-	if (ptr->chave == chave) {
+int buscaPai(TNo* ptr, TipoAluno item) {
+	TNo* ant = NULL;
+	if (ptr->item.RA == item.RA) {
 		return 0;
 	}
-	while ((ptr != NULL) && (ptr->chave != chave)) {
-		if (chave == ptr->chave) {
-			return ant->chave;
+	ant = ptr;
+	while ((ptr != NULL) && (ptr->item.RA != item.RA)) {
+		if (item.RA == ptr->item.RA) {
+			return ant->item.RA;
 		}
-		else if (chave > ptr->chave) {
+		else if (item.RA > ptr->item.RA) {
 			ant = ptr;
 			ptr = ptr->dir;
 		}
@@ -20,19 +22,20 @@ int buscaPai(TNo* ptr, int chave) {
 			ptr = ptr->esq;
 		}
 	}
+
 	free(ant);
 	return -1;
 }
 
-int buscaIrmao(TNo* ptr, int chave) {
-	TNo* ant;
+int buscaIrmao(TNo* ptr, TipoAluno item) {
+	TNo* ant = NULL;
 	int esq, dir;
 	esq = dir = 0;
-	if (ptr->chave == chave) {
+	if (ptr->item.RA == item.RA) {
 		return 0;
 	}
-	while ((ptr != NULL) && (ptr->chave != chave)) {
-		if (chave > ptr->chave) {
+	while ((ptr != NULL) && (ptr->item.RA != item.RA)) {
+		if (item.RA > ptr->item.RA) {
 			ant = ptr;
 			ptr = ptr->dir;
 			esq = 1;
@@ -52,7 +55,7 @@ int buscaIrmao(TNo* ptr, int chave) {
 		else
 		{
 			ant = ant->dir;
-			return ant->chave;
+			return ant->item.RA;
 		}
 	}
 	else {
@@ -62,9 +65,38 @@ int buscaIrmao(TNo* ptr, int chave) {
 		else
 		{
 			ant = ant->esq;
-			return ant->chave;
+			return ant->item.RA;
 		}
 	}
 	free(ant);
 
+}
+
+void escreveNo(TipoAluno item) {
+		//printf("\nNome: %s ", item.nome);
+		printf("\nCodigo: %d ", item.RA);
+		/*printf("\nCPF: %d ", item.CPF);
+		printf("\nRA: %d ", item.RA);
+		printf("\nData de Nascimento: %s ", item.dataDeNascimento);
+		printf("\nSexo: %s ", item.sexo);*/
+}
+void leNo(TipoAluno* item) {
+	fflush(stdin);
+	//printf("\nNome: "); fflush(stdin); scanf("%s", &item->nome);
+	printf("Codigo: "); fflush(stdin); scanf("%d", &item->RA);
+	/*printf("CPF: "); fflush(stdin); scanf("%d", &item->CPF);
+	printf("RA: "); fflush(stdin); scanf("%d", &item->RA);
+	printf("Data de Nascimento: "); fflush(stdin), scanf("%s", &item->dataDeNascimento);
+	printf("Sexo: "); fflush(stdin);  scanf("%s", &item->sexo);*/
+}
+void exibeMenu() {
+	system("cls");
+	printf("0 - Digite para sair");
+	printf("\n1 - Inserir novo elememto");
+	printf("\n2 - Retirar um elemento");
+	printf("\n3 - Pesquisar elemento");
+	printf("\n4 - Imprimir via in_orden");
+	printf("\n5 - Imprimir via pre_orden");
+	printf("\n6 - Imprimir via pos_orden");
+	printf("\nSua Opção: ");
 }
