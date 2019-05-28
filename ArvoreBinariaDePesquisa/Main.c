@@ -52,6 +52,15 @@ int main() {
 			system("pause");
 			break;
 		}
+		case 7: {
+			leNo(&item);
+			buscaPai(raiz, item);
+			break;
+		} case 8:{
+			leNo(&item);
+			buscaIrmao(raiz, item);
+			break;
+		}
 			default:
 				printf("\nO opçãp invalida!");
 				break;

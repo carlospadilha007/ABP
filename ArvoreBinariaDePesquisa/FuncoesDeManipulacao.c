@@ -10,11 +10,7 @@ void buscaPai(TNo* ptr, TipoAluno item) {
 	}
 	ant = ptr;
 	while ((ptr != NULL) && (ptr->item.RA != item.RA)) {
-		if (item.RA == ptr->item.RA) {
-			printf("\nO seu pai é #%d ", ant->item.RA);
-			return;
-		}
-		else if (item.RA > ptr->item.RA) {
+		if (item.RA > ptr->item.RA) {
 			ant = ptr;
 			ptr = ptr->dir;
 		}
@@ -22,9 +18,14 @@ void buscaPai(TNo* ptr, TipoAluno item) {
 			ant = ptr;
 			ptr = ptr->esq;
 		}
-	}
+	} 
+if (ptr == NULL) { 
 	printf("\nNão esta na arvore!");
-
+}
+else if (item.RA == ptr->item.RA) {
+	printf("\nO seu pai é #%d ", ant->item.RA);
+}
+	system("pause");
 }
 
 void buscaIrmao(TNo* ptr, TipoAluno item) {
@@ -34,30 +35,7 @@ void buscaIrmao(TNo* ptr, TipoAluno item) {
 	}
 	ant = ptr;
 	while ((ptr != NULL) && (ptr->item.RA != item.RA)) {
-		if (ptr->item.RA == item.RA) {
-			if (ptr->item.RA > item.RA) {
-				if (ant->dir == NULL) {
-					printf("\nNão possui irmãos!");
-					return;
-				}
-				else
-				{
-					printf("\nO seu irmão é: #%d", ant->dir->item.RA);
-					return;
-				}
-			}
-			else {
-				if (ant->esq == NULL) {
-					printf("\nNão possui irmãos!");
-					return;
-				}
-				else
-				{
-					printf("\nO seu irmão é: #%d", ant->esq->item.RA);
-					return;
-				}
-			}
-		}
+		
 		if (item.RA > ptr->item.RA) {
 			ant = ptr;
 			ptr = ptr->dir;
@@ -68,7 +46,32 @@ void buscaIrmao(TNo* ptr, TipoAluno item) {
 			ptr = ptr->esq;
 		}
 	}
-	printf("Não esta na arvore!");
+	if (ptr == NULL) {
+		printf("\nNão esta na arvore!");
+	}else if (ptr->item.RA == item.RA) {
+		if (item.RA < ant->item.RA  ) {
+			if (ant->dir == NULL) {
+				printf("\nNão possui irmãos!");
+			}
+			else
+			{
+				printf("\nO seu irmão é: #%d", ant->dir->item.RA);
+			}
+		}
+		else {
+			if (ant->esq == NULL) {
+				printf("\nNão possui irmãos!");
+			}
+			else
+			{
+				printf("\nO seu irmão é: #%d", ant->esq->item.RA);
+			}
+		}
+	}
+	else {
+		printf("Não esta na arvore!");
+	}
+	system("pause");
 
 }
 
@@ -92,5 +95,7 @@ void exibeMenu() {
 	printf("\n4 - Imprimir via in_orden");
 	printf("\n5 - Imprimir via pre_orden");
 	printf("\n6 - Imprimir via pos_orden");
+	printf("\n7 - Busca pai");
+	printf("\n8 - Busca irmão");
 	printf("\nSua Opção: ");
 }

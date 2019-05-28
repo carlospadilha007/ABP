@@ -33,3 +33,4 @@ void pesquisa(TNo* ptr, TipoAluno item);
 void in_ordem(TNo* ptr);
 void pre_ordem(TNo* ptr);
 void pos_ordem(TNo* ptr);
+
