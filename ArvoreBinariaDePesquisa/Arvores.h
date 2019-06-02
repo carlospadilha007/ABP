@@ -33,4 +33,9 @@ void pesquisa(TNo* ptr, TipoAluno item);
 void in_ordem(TNo* ptr);
 void pre_ordem(TNo* ptr);
 void pos_ordem(TNo* ptr);
-
+//Padrão da avl
+void insereAVL(TNo** ptr, TipoAluno item);
+void removeAVL(TNo** ptr, TipoAluno* item);
+int altura(TNo* ptr);
+void rotacaoDir(TNo** ptr);
+void rotacaoEsq(TNo** ptr);

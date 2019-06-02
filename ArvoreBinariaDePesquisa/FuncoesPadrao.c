@@ -89,6 +89,7 @@ void pesquisa(TNo* ptr, TipoAluno item) {
 	else {
 		printf("\nA chave #%d esta na arvore!", item.RA);
 	}
+	system("pause");
 }
 
 void in_ordem(TNo* ptr) {
@@ -113,4 +114,103 @@ void pos_ordem(TNo* ptr) {
 		pos_ordem(ptr->dir);
 		escreveNo(ptr->item);
 	}
+}
+
+// Funções Padrões AVL
+void insereAVL(TNo **ptr, TipoAluno item) {
+	if (*ptr == NULL) {
+		(*ptr) = (TNo*)malloc(sizeof(TNo));
+		(*ptr)->esq = NULL;
+		(*ptr)->dir = NULL;
+		(*ptr)->item = item;
+	}
+	else {
+		if (item.RA < (*ptr)->item.RA) {
+			insere(&(*ptr)->esq, item);
+		}
+		else if (item.RA > (*ptr)->item.RA) {
+			insere(&(*ptr)->dir, item);
+		}
+	}
+	// Parte do rotacionamento
+	int FB = altura((*ptr)->dir) - altura((*ptr)->esq);
+	if (FB == 2) {
+		if (item.RA > (*ptr)->item.RA) {
+			int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
+			if (FBF == 1)
+				rotacaoEsq(&ptr);
+			else if (FBF == -1) {
+				rotacaoDir(&ptr);
+				rotacaoEsq(&ptr);
+			}
+
+		}
+	}
+	else if (FB == -2) {
+		if (item.RA < (*ptr)->item.RA) {
+			int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
+			if (FBF == 1)
+				rotacaoDir(&ptr);
+			else if (FBF == -1) {
+				rotacaoEsq(&ptr);
+				rotacaoDir(&ptr);
+			}
+
+		}
+	}
+}
+void removeAVL(TNo **ptr, TipoAluno *item) {
+	if ((*ptr) == NULL) {
+		printf("\nA chave #%d não esta na arvore!", item->RA);
+	}
+	else if (item->RA < (*ptr)->item.RA) {
+		retira(&(*ptr)->esq, item);
+	}
+	else if (item->RA > (*ptr)->item.RA) {
+		retira(&(*ptr)->dir, item);
+	}
+	else {
+		TNo* aux = *ptr;
+		if ((*ptr)->dir == NULL) {
+			(*ptr) = (*ptr)->esq;
+			free(aux);
+		}
+		else if ((*ptr)->esq == NULL) {
+			(*ptr) = (*ptr)->esq;
+			free(aux);
+		}
+		else {
+			antecessor((*ptr), &(*ptr)->esq);
+		}
+	}
+}
+
+int altura(TNo* ptr) {
+	if (ptr == NULL){
+		return -1;
+	}
+	else {
+		int he = altura(ptr->esq);
+		int hd = altura(ptr->dir);
+		if (he < hd)
+			return hd + 1;
+		else return he + 1;
+	}
+}
+
+void rotacaoDir(TNo** ptr) {
+	TNo* q, * temp;
+	q = (*ptr)->esq;
+	temp = q->dir;
+	q->dir = (*ptr);
+	(*ptr)->esq = temp;
+	(*ptr) = q;
+}
+void rotacaoEsq(TNo** ptr) {
+	TNo* q, * temp;
+	q = (*ptr)->esq;
+	temp = q->dir;
+	q->esq = (*ptr);
+	(*ptr)->dir = temp;
+	(*ptr) = q;
 }

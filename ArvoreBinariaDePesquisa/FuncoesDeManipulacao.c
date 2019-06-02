@@ -97,5 +97,6 @@ void exibeMenu() {
 	printf("\n6 - Imprimir via pos_orden");
 	printf("\n7 - Busca pai");
 	printf("\n8 - Busca irmão");
+	printf("\n9 - Imprimi Avl");
 	printf("\nSua Opção: ");
 }

@@ -6,10 +6,11 @@
 
 int main() {
 	setlocale(LC_ALL, "Portuguese");
-	TNo *raiz;
+	TNo *raiz, *raizAVL;
 	TipoAluno item;
 	int op = 1;
 	inicializa(&raiz);
+	inicializa(&raizAVL);
 	while (op != 0)
 	{
 		exibeMenu();
@@ -23,6 +24,7 @@ int main() {
 			printf("\nDigite o RA ser Inserido: ");
 			leNo(&item);
 			insere(&raiz, item);
+			insere(&raizAVL, item);
 			break;
 		}
 		case 2: {
@@ -60,6 +62,8 @@ int main() {
 			leNo(&item);
 			buscaIrmao(raiz, item);
 			break;
+		}case 9: {
+			in_ordem(raizAVL);
 		}
 			default:
 				printf("\nO opçãp invalida!");
