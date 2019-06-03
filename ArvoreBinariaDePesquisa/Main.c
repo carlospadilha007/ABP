@@ -64,6 +64,7 @@ int main() {
 			break;
 		}case 9: {
 			in_ordem(raizAVL);
+			system("pause");
 		}
 			default:
 				printf("\nO opçãp invalida!");
