@@ -22,6 +22,8 @@ void buscaIrmao(TNo* ptr, TipoAluno item);
 void escreveNo(TipoAluno item);
 void leNo(TipoAluno* item);
 void exibeMenu();
+void menu(TNo** raiz, TNo** raizAVL);
+void subMenu();
 
 //Funções Padrão
 void inicializa(TNo** ptr);
@@ -35,7 +37,7 @@ void pre_ordem(TNo* ptr);
 void pos_ordem(TNo* ptr);
 //Padrão da avl
 void insereAVL(TNo** ptr, TipoAluno item);
-void removeAVL(TNo** ptr, TipoAluno* item);
+void retiraAVL(TNo** ptr, TipoAluno* item);
 int altura(TNo* ptr);
 void rotacaoDir(TNo** ptr);
 void rotacaoEsq(TNo** ptr);

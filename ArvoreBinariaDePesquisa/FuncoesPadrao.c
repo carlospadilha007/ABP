@@ -135,39 +135,34 @@ void insereAVL(TNo **ptr, TipoAluno item) {
 	// Parte do rotacionamento
 	int FB = altura((*ptr)->dir) - altura((*ptr)->esq);
 	if (FB == 2) {
-		if (item.RA > (*ptr)->item.RA) {
 			int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
 			if (FBF == 1)
 				rotacaoEsq(&ptr);
 			else if (FBF == -1) {
-				rotacaoDir(&ptr);
+				rotacaoDir(&(*ptr)->dir);
 				rotacaoEsq(&ptr);
 			}
-
-		}
 	}
 	else if (FB == -2) {
-		if (item.RA < (*ptr)->item.RA) {
 			int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
-			if (FBF == 1)
-				rotacaoDir(&ptr);
-			else if (FBF == -1) {
-				rotacaoEsq(&ptr);
+			if (FBF == 1) {
+				rotacaoEsq(&(*ptr)->esq);
 				rotacaoDir(&ptr);
 			}
-
-		}
+			else if (FBF == -1) {
+				rotacaoDir(&ptr);
+			}
 	}
 }
-void removeAVL(TNo **ptr, TipoAluno *item) {
+void retiraAVL(TNo **ptr, TipoAluno *item) {
 	if ((*ptr) == NULL) {
 		printf("\nA chave #%d não esta na arvore!", item->RA);
 	}
 	else if (item->RA < (*ptr)->item.RA) {
-		retira(&(*ptr)->esq, item);
+		retiraAVL(&(*ptr)->esq, item);
 	}
 	else if (item->RA > (*ptr)->item.RA) {
-		retira(&(*ptr)->dir, item);
+		retiraAVL(&(*ptr)->dir, item);
 	}
 	else {
 		TNo* aux = *ptr;
@@ -181,6 +176,29 @@ void removeAVL(TNo **ptr, TipoAluno *item) {
 		}
 		else {
 			antecessor((*ptr), &(*ptr)->esq);
+		}
+	}
+	//Rebalanceamento
+	if ((*ptr) != NULL) {
+		int FB = altura((*ptr)->dir) - altura((*ptr)->esq);
+		if (FB == 2) {
+				int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
+				if (FBF == 1 || FBF == 0)
+					rotacaoEsq(&ptr);
+				else if (FBF == -1) {
+					rotacaoDir(&(*ptr)->dir);
+					rotacaoEsq(&ptr);
+				}
+		}
+		else if (FB == -2) {
+				int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
+				if (FBF == -1 || FBF == 0) {
+					rotacaoDir(&ptr);
+				}
+				else if (FBF == 1){
+					rotacaoEsq(&(*ptr)->esq);
+					rotacaoDir(&ptr);
+				}
 		}
 	}
 }

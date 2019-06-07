@@ -89,7 +89,7 @@ void leNo(TipoAluno* item) {
 void exibeMenu() {
 	system("cls");
 	printf("0 - Digite para sair");
-	printf("\n1 - Inserir novo elememto");
+	printf("\n1 - Inserir novo elemento");
 	printf("\n2 - Retirar um elemento");
 	printf("\n3 - Pesquisar elemento");
 	printf("\n4 - Imprimir via in_orden");
@@ -97,6 +97,131 @@ void exibeMenu() {
 	printf("\n6 - Imprimir via pos_orden");
 	printf("\n7 - Busca pai");
 	printf("\n8 - Busca irmão");
-	printf("\n9 - Imprimi Avl");
 	printf("\nSua Opção: ");
+}
+
+void subMenu() {
+	system("cls");
+	printf("1 - Imprimir somente ABP");
+	printf("\n2 - Imprimir somente AVL");
+	printf("\n3 - Imprimir ambas as arvores");
+	printf("\nDigite sua opção: ");
+}
+
+void menu(TNo** raiz, TNo** raizAVL) {
+	TipoAluno item;
+	int subOp, op = 1;
+	while (op != 0)
+	{
+		exibeMenu();
+		scanf("%d", &op);
+		if (op == 0) {
+			break;
+		}
+		switch (op)
+		{
+		case 1: {
+			printf("\nDigite o RA ser Inserido: ");
+			leNo(&item);
+			insere(&(*raiz), item);
+			insere(&(*raizAVL), item);
+			break;
+		}
+		case 2: {
+			printf("\nDigite o RA ser retirado: ");
+			leNo(&item);
+			retira(&(*raiz), &item);
+			retiraAVL(&(*raizAVL), &item);
+			break;
+		}
+		case 3: {
+			printf("\nDigite o RA ser pesquisado: ");
+			leNo(&item);
+			pesquisa(*raiz, item);
+			break;
+		}
+		case 4: {
+			subMenu();
+			scanf("%d", &subOp);
+			if (subOp == 1) {
+				printf("\nArvore ABP: \n");
+				in_ordem(*raiz);
+			}
+			else if (subOp == 2) {
+				printf("\nArvore AVL: \n");
+				in_ordem(*raizAVL);
+			}
+			else if (subOp == 3) {
+				printf("\nArvore ABP: \n");
+				in_ordem(*raiz);
+				printf("\n\nArvore AVL: \n");
+				in_ordem(*raizAVL);
+			}
+			else {
+				printf("\nOpção inválida!\nRetornando para o menu principal.....");
+			}
+			system("pause");
+			break;
+		}
+		case 5: {
+			subMenu();
+			scanf("%d", &subOp);
+			if (subOp == 1) {
+				printf("\nArvore ABP: \n");
+				pre_ordem(*raiz);
+			}
+			else if (subOp == 2) {
+				printf("\nArvore AVL: \n");
+				pre_ordem(*raizAVL);
+			}
+			else if (subOp == 3) {
+				printf("\nArvore ABP: \n");
+				pre_ordem(*raiz);
+				printf("\n\nArvore AVL: \n");
+				pre_ordem(*raizAVL);
+			}
+			else {
+				printf("\nOpção inválida!\nRetornando para o menu principal.....");
+			}
+			system("pause");
+			break;
+		}
+		case 6: {
+			subMenu();
+			scanf("%d", &subOp);
+			if (subOp == 1) {
+				printf("\nArvore ABP: \n");
+				pos_ordem(*raiz);
+			}
+			else if (subOp == 2) {
+				printf("\nArvore AVL: \n");
+				pos_ordem(*raizAVL);
+			}
+			else if (subOp == 3) {
+				printf("\nArvore ABP: \n");
+				pos_ordem(*raiz);
+				printf("\n\nArvore AVL: \n");
+				pos_ordem(*raizAVL);
+			}
+			else {
+				printf("\nOpção inválida!\nRetornando para o menu principal.....");
+			}
+			system("pause");
+			break;
+		}
+		case 7: {
+			leNo(&item);
+			buscaPai(*raiz, item);
+			break;
+		} case 8: {
+			leNo(&item);
+			buscaIrmao(*raiz, item);
+			break;
+		}
+		default:
+			printf("\nOpção inválida!\nRetornando para o menu principal.....");
+			system("pause");
+			break;
+		}
+	}
 }
