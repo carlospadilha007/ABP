@@ -76,9 +76,10 @@ void buscaIrmao(TNo* ptr, TipoAluno item) {
 }
 
 void escreveNo(TipoAluno item) {
-		//printf("\nNome: %s ", item.nome);
-		printf("\nRA: %d ", item.RA);
-		//printf("\nData de Nascimento: %s ", item.dataDeNascimento);
+		//printf("\nNome: %s\t", item.nome);
+		printf("RA: %d\t", item.RA);
+		//printf("Data de Nascimento: %s\t", item.dataDeNascimento);
+		printf("\n");
 }
 void leNo(TipoAluno* item) {
 	fflush(stdin);
@@ -97,6 +98,7 @@ void exibeMenu() {
 	printf("\n6 - Imprimir via pos_orden");
 	printf("\n7 - Busca pai");
 	printf("\n8 - Busca irmão");
+	printf("\n9 - Encher arvore");
 	printf("\nSua Opção: ");
 }
 
@@ -121,10 +123,10 @@ void menu(TNo** raiz, TNo** raizAVL) {
 		switch (op)
 		{
 		case 1: {
-			printf("\nDigite o RA ser Inserido: ");
+			printf("\nDigite os dados a serem inseridos: \n");
 			leNo(&item);
 			insere(&(*raiz), item);
-			insere(&(*raizAVL), item);
+			insereAVL(&(*raizAVL), item);
 			break;
 		}
 		case 2: {
@@ -217,6 +219,8 @@ void menu(TNo** raiz, TNo** raizAVL) {
 			leNo(&item);
 			buscaIrmao(*raiz, item);
 			break;
+		} case 9: {
+			encheArvore(raiz, raizAVL);
 		}
 		default:
 			printf("\nOpção inválida!\nRetornando para o menu principal.....");
@@ -224,4 +228,21 @@ void menu(TNo** raiz, TNo** raizAVL) {
 			break;
 		}
 	}
+}
+
+void encheArvore(TNo **raiz, TNo **raizAVL) {
+	TipoAluno item;
+	FILE* file;
+	file = fopen("Entrada.dat", "r");
+	while (!feof(file))
+	{
+		fscanf(file,"%d %s %s", &item.RA, &item.nome, &item.dataDeNascimento);
+		insere(&(*raiz), item);
+		insereAVL(&(*raizAVL), item);
+	}
+}
+
+void menuAntecessorSucessor() {
+	printf("\n1 - Utilizar antecessor");
+	printf("\n2 - Utilizar sucessor");
 }

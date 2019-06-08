@@ -45,7 +45,18 @@ void retira(TNo** ptr, TipoAluno *item) {
 			free(aux);
 		}
 		else {
-			antecessor((*ptr), &(*ptr)->esq);
+			int op = 0;
+			while (op != 1 && op != 2){
+				menuAntecessorSucessor();
+				scanf("%d", &op);
+			}
+			if (op == 1) {
+				antecessor((*ptr), &(*ptr)->esq);
+			}
+			else {
+				sucessor((*ptr), &(*ptr)->esq);
+			}
+
 		}
 	}
 }
@@ -64,7 +75,7 @@ void antecessor(TNo* q, TNo** r) {
 
 void sucessor(TNo* q, TNo** r) {
 	if ((*r)->esq != NULL) {
-		antecessor(q, &(*r)->esq);
+		sucessor(q, &(*r)->esq);
 	}
 	else {
 		q->item = (*r)->item;
@@ -137,20 +148,20 @@ void insereAVL(TNo **ptr, TipoAluno item) {
 	if (FB == 2) {
 			int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
 			if (FBF == 1)
-				rotacaoEsq(&ptr);
+				rotacaoEsq(ptr);
 			else if (FBF == -1) {
 				rotacaoDir(&(*ptr)->dir);
-				rotacaoEsq(&ptr);
+				rotacaoEsq(ptr);
 			}
 	}
 	else if (FB == -2) {
-			int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
+			int FBF = altura((*ptr)->esq->dir) - altura((*ptr)->esq->esq);
 			if (FBF == 1) {
 				rotacaoEsq(&(*ptr)->esq);
-				rotacaoDir(&ptr);
+				rotacaoDir(ptr);
 			}
 			else if (FBF == -1) {
-				rotacaoDir(&ptr);
+				rotacaoDir(ptr);
 			}
 	}
 }
@@ -171,11 +182,21 @@ void retiraAVL(TNo **ptr, TipoAluno *item) {
 			free(aux);
 		}
 		else if ((*ptr)->esq == NULL) {
-			(*ptr) = (*ptr)->esq;
+			(*ptr) = (*ptr)->dir;
 			free(aux);
 		}
 		else {
-			antecessor((*ptr), &(*ptr)->esq);
+			int op = 0;
+			while (op != 1 && op != 2) {
+				menuAntecessorSucessor();
+				scanf("%d", &op);
+			}
+			if (op == 1) {
+				antecessor((*ptr), &(*ptr)->esq);
+			}
+			else {
+				sucessor((*ptr), &(*ptr)->esq);
+			}
 		}
 	}
 	//Rebalanceamento
@@ -184,20 +205,20 @@ void retiraAVL(TNo **ptr, TipoAluno *item) {
 		if (FB == 2) {
 				int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
 				if (FBF == 1 || FBF == 0)
-					rotacaoEsq(&ptr);
+					rotacaoEsq(ptr);
 				else if (FBF == -1) {
 					rotacaoDir(&(*ptr)->dir);
-					rotacaoEsq(&ptr);
+					rotacaoEsq(ptr);
 				}
 		}
 		else if (FB == -2) {
-				int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
+				int FBF = altura((*ptr)->esq->dir) - altura((*ptr)->esq->esq);
 				if (FBF == -1 || FBF == 0) {
-					rotacaoDir(&ptr);
+					rotacaoDir(ptr);
 				}
 				else if (FBF == 1){
 					rotacaoEsq(&(*ptr)->esq);
-					rotacaoDir(&ptr);
+					rotacaoDir(ptr);
 				}
 		}
 	}
@@ -217,7 +238,7 @@ int altura(TNo* ptr) {
 }
 
 void rotacaoDir(TNo** ptr) {
-	TNo* q, * temp;
+	TNo *q, *temp;
 	q = (*ptr)->esq;
 	temp = q->dir;
 	q->dir = (*ptr);
@@ -225,9 +246,9 @@ void rotacaoDir(TNo** ptr) {
 	(*ptr) = q;
 }
 void rotacaoEsq(TNo** ptr) {
-	TNo* q, * temp;
-	q = (*ptr)->esq;
-	temp = q->dir;
+	TNo *q, *temp;
+	q = (*ptr)->dir;
+	temp = q->esq;
 	q->esq = (*ptr);
 	(*ptr)->dir = temp;
 	(*ptr) = q;

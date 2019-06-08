@@ -24,6 +24,8 @@ void leNo(TipoAluno* item);
 void exibeMenu();
 void menu(TNo** raiz, TNo** raizAVL);
 void subMenu();
+void encheArvore(TNo** raiz, TNo** raizAVL);
+void menuAntecessorSucessor();
 
 //Funções Padrão
 void inicializa(TNo** ptr);
