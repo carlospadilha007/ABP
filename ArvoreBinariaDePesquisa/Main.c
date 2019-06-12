@@ -14,6 +14,6 @@ int main() {
 	inicializa(&raizAVL);
 	encheArvore(&raiz, &raizAVL);
 	menu(&raiz, &raizAVL);
-    system("pause");
+        system("pause");
 	return 0;
 }

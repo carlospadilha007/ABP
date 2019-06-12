@@ -26,7 +26,7 @@ void insere(TNo** ptr, TipoAluno item) {
 
 void retira(TNo** ptr, TipoAluno *item) {
 	if ((*ptr) == NULL) {
-		printf("\nA chave #%d não esta na arvore!", item->RA);
+		printf("\nA chave #%d nï¿½o esta na arvore!", item->RA);
 	}
 	else if (item->RA < (*ptr)->item.RA) {
 		retira(&(*ptr)->esq, item);
@@ -97,12 +97,12 @@ void pesquisa(TNo* ptr, TipoAluno item) {
 		}
 	}
 	if (ptr == NULL) {
-		printf("\nA chave #%d não esta na arvore!", item.RA);
+		printf("\nA chave #%d nï¿½o esta na arvore!", item.RA);
 	}
 	else {
 		printf("\nA chave #%d esta na arvore!", item.RA);
 	}
-	printf("\nO numero de comparações feitas foi  %d\n", cont);
+	printf("\nO numero de comparaï¿½ï¿½es feitas foi  %d\n", cont);
 	system("pause");
 }
 
@@ -130,7 +130,7 @@ void pos_ordem(TNo* ptr) {
 	}
 }
 
-// Funções Padrões AVL
+// Funï¿½ï¿½es Padrï¿½es AVL
 void insereAVL(TNo **ptr, TipoAluno item) {
 	if (*ptr == NULL) {
 		(*ptr) = (TNo*)malloc(sizeof(TNo));
@@ -149,28 +149,28 @@ void insereAVL(TNo **ptr, TipoAluno item) {
 	// Parte do rotacionamento
 	int FB = altura((*ptr)->dir) - altura((*ptr)->esq);
 	if (FB == 2) {
-			int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
-			if (FBF == 1)
-				rotacaoEsq(ptr);
-			else if (FBF == -1) {
-				rotacaoDir(&(*ptr)->dir);
-				rotacaoEsq(ptr);
-			}
+                    int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
+                    if (FBF == 1)
+                            rotacaoEsq(ptr);
+                    else if (FBF == -1) {
+                            rotacaoDir(&(*ptr)->dir);
+                            rotacaoEsq(ptr);
+                    }
 	}
 	else if (FB == -2) {
-			int FBF = altura((*ptr)->esq->dir) - altura((*ptr)->esq->esq);
-			if (FBF == 1) {
-				rotacaoEsq(&(*ptr)->esq);
-				rotacaoDir(ptr);
-			}
-			else if (FBF == -1) {
-				rotacaoDir(ptr);
-			}
+                    int FBF = altura((*ptr)->esq->dir) - altura((*ptr)->esq->esq);
+                    if (FBF == 1) {
+                            rotacaoEsq(&(*ptr)->esq);
+                            rotacaoDir(ptr);
+                    }
+                    else if (FBF == -1) {
+                            rotacaoDir(ptr);
+                    }
 	}
 }
 void retiraAVL(TNo **ptr, TipoAluno *item) {
 	if ((*ptr) == NULL) {
-		printf("\nA chave #%d não esta na arvore!", item->RA);
+		printf("\nA chave #%d nï¿½o esta na arvore!", item->RA);
 	}
 	else if (item->RA < (*ptr)->item.RA) {
 		retiraAVL(&(*ptr)->esq, item);
