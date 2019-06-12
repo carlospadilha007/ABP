@@ -7,7 +7,7 @@
 void buscaPai(TNo* ptr, TipoAluno item) {
 	TNo* ant = NULL;
 	if (ptr->item.RA == item.RA) {
-		printf("\n� a raiz, logo n�o possui pai!");
+		printf("\nÉ a raiz, logo não possui pai!");
 	}
 	ant = ptr;
 	while ((ptr != NULL) && (ptr->item.RA != item.RA)) {
@@ -21,10 +21,10 @@ void buscaPai(TNo* ptr, TipoAluno item) {
 		}
 	} 
 if (ptr == NULL) { 
-	printf("\nN�o esta na arvore!");
+	printf("\nNão esta na arvore!");
 }
 else if (item.RA == ptr->item.RA) {
-	printf("\nO seu pai � #%d ", ant->item.RA);
+	printf("\nO seu pai é #%d ", ant->item.RA);
 }
 	system("pause");
 }
@@ -33,7 +33,7 @@ else if (item.RA == ptr->item.RA) {
 void buscaIrmao(TNo* ptr, TipoAluno item) {
 	TNo* ant = NULL;
 	if (ptr->item.RA == item.RA) {
-		printf("\nN�o possui irm�os, visto que � a raiz!");
+		printf("\nNão possui irmãos, visto que é a raiz!");
 	}
 	ant = ptr;
 	while ((ptr != NULL) && (ptr->item.RA != item.RA)) {
@@ -49,24 +49,24 @@ void buscaIrmao(TNo* ptr, TipoAluno item) {
 		}
 	}
 	if (ptr == NULL) {
-		printf("\nN�o esta na arvore!");
+		printf("\nNão esta na arvore!");
 	}else if (ptr->item.RA == item.RA) {
 		if (item.RA < ant->item.RA  ) {
 			if (ant->dir == NULL) {
-				printf("\nN�o possui irm�os!");
+				printf("\nNão possui irmãos!");
 			}
 			else
 			{
-				printf("\nO seu irm�o �: #%d", ant->dir->item.RA);
+				printf("\nO seu irmão é: #%d", ant->dir->item.RA);
 			}
 		}
 		else {
 			if (ant->esq == NULL) {
-				printf("\nN�o possui irm�os!");
+				printf("\nN�o possui irmãos!");
 			}
 			else
 			{
-				printf("\nO seu irm�o �: #%d", ant->esq->item.RA);
+				printf("\nO seu irmão é: #%d", ant->esq->item.RA);
 			}
 		}
 	}
@@ -104,9 +104,9 @@ void exibeMenu() {
 	printf("\n5 - Imprimir via pre_orden");
 	printf("\n6 - Imprimir via pos_orden");
 	printf("\n7 - Busca pai");
-	printf("\n8 - Busca irm�o");
+	printf("\n8 - Busca irmão");
 	printf("\n9 - Encher arvore");
-	printf("\nSua Op��o: ");
+	printf("\nSua Opção: ");
 }
 
 // Menu de impreção
@@ -115,7 +115,7 @@ void subMenu() {
 	printf("1 - Imprimir somente ABP");
 	printf("\n2 - Imprimir somente AVL");
 	printf("\n3 - Imprimir ambas as arvores");
-	printf("\nDigite sua op��o: ");
+	printf("\nDigite sua opção: ");
 }
 
 // Menu principal
@@ -173,7 +173,7 @@ void menu(TNo** raiz, TNo** raizAVL) {
 				in_ordem(*raizAVL);
 			}
 			else {
-				printf("\nOp��o inv�lida!\nRetornando para o menu principal.....");
+				printf("\nOpção inválida!\nRetornando para o menu principal.....");
 			}
 			system("pause");
 			break;
@@ -196,7 +196,7 @@ void menu(TNo** raiz, TNo** raizAVL) {
 				pre_ordem(*raizAVL);
 			}
 			else {
-				printf("\nOp��o inv�lida!\nRetornando para o menu principal.....");
+				printf("\nOpção inválida!\nRetornando para o menu principal.....");
 			}
 			system("pause");
 			break;
@@ -219,7 +219,7 @@ void menu(TNo** raiz, TNo** raizAVL) {
 				pos_ordem(*raizAVL);
 			}
 			else {
-				printf("\nOp��o inv�lida!\nRetornando para o menu principal.....");
+				printf("\nOpção inválida!\nRetornando para o menu principal.....");
 			}
 			system("pause");
 			break;
@@ -237,7 +237,7 @@ void menu(TNo** raiz, TNo** raizAVL) {
             break;
 		}
 		default:
-			printf("\nOp��o inv�lida!\nRetornando para o menu principal.....");
+			printf("\nOpção inválida!\nRetornando para o menu principal.....");
 			system("pause");
 			break;
 		}
@@ -250,7 +250,7 @@ void encheArvore(TNo **raiz, TNo **raizAVL) {
 	FILE* file;
 	file = fopen("Entrada.dat", "r");
 	if (file == NULL) {
-		printf("ERRO, o arquivo n�o pode ser aberto!\n");
+		printf("ERRO, o arquivo não pode ser aberto!\n");
 		system("pause");
 		return;
 	}

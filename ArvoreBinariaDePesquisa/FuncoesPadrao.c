@@ -29,7 +29,7 @@ void insere(TNo** ptr, TipoAluno item) {
 // Retira os elementos na ABP
 void retira(TNo** ptr, TipoAluno *item) {
 	if ((*ptr) == NULL) {
-		printf("\nA chave #%d n�o esta na arvore!", item->RA);
+		printf("\nA chave #%d não esta na arvore!", item->RA);
 	}
 	else if (item->RA < (*ptr)->item.RA) {
 		retira(&(*ptr)->esq, item);
@@ -103,12 +103,12 @@ void pesquisa(TNo* ptr, TipoAluno item) {
 		}
 	}
 	if (ptr == NULL) {
-		printf("\nA chave #%d n�o esta na arvore!", item.RA);
+		printf("\nA chave #%d não esta na arvore!", item.RA);
 	}
 	else {
 		printf("\nA chave #%d esta na arvore!", item.RA);
 	}
-	printf("\nO numero de compara��es feitas foi  %d\n", cont);
+	printf("\nO numero de comparações feitas foi  %d\n", cont);
 	system("pause");
 }
 
