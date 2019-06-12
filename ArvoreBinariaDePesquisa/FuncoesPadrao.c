@@ -3,10 +3,12 @@
 #include <stdlib.h>
 #include "Arvores.h"
 
+// Incializa as arvores
 void inicializa(TNo** ptr) {
 	*ptr = NULL;
 }
 
+// Insere elementos na ABP
 void insere(TNo** ptr, TipoAluno item) {
 	if (*ptr == NULL) {
 		(*ptr) = (TNo*)malloc(sizeof(TNo));
@@ -24,6 +26,7 @@ void insere(TNo** ptr, TipoAluno item) {
 	}
 }
 
+// Retira os elementos na ABP
 void retira(TNo** ptr, TipoAluno *item) {
 	if ((*ptr) == NULL) {
 		printf("\nA chave #%d n�o esta na arvore!", item->RA);
@@ -61,6 +64,7 @@ void retira(TNo** ptr, TipoAluno *item) {
 	}
 }
 
+// Busca o antecessor (filho mais a direita da esquerda)
 void antecessor(TNo* q, TNo** r) {
 	if ((*r)->dir != NULL) {
 		antecessor(q, &(*r)->dir);
@@ -73,6 +77,7 @@ void antecessor(TNo* q, TNo** r) {
 	}
 }
 
+// Busca o sucessor (filho mais a esquerda da direita)
 void sucessor(TNo* q, TNo** r) {
 	if ((*r)->esq != NULL) {
 		sucessor(q, &(*r)->esq);
@@ -85,6 +90,7 @@ void sucessor(TNo* q, TNo** r) {
 	}
 }
 
+// Pesquisa os elementos e retorna se o elemento se encontra e o numero de buscas
 void pesquisa(TNo* ptr, TipoAluno item) {
 	int cont = 0;
 	while ((ptr != NULL) && (ptr->item.RA != item.RA)) {
@@ -106,6 +112,7 @@ void pesquisa(TNo* ptr, TipoAluno item) {
 	system("pause");
 }
 
+// Algoritmo que imprimi respectivamente: filho esq, raiz e filho dir
 void in_ordem(TNo* ptr) {
 	if (ptr != NULL) {
 		in_ordem(ptr->esq);
@@ -114,6 +121,7 @@ void in_ordem(TNo* ptr) {
 	}
 }
 
+// Algoritmo que imprimi respectivamente: raiz, filho esq e filho dir
 void pre_ordem(TNo* ptr) {
 	if (ptr != NULL) {
 		escreveNo(ptr->item);
@@ -122,6 +130,7 @@ void pre_ordem(TNo* ptr) {
 	}
 }
 
+// Algoritmo que imprimi respectivamente: filho esq, filho dir e raiz
 void pos_ordem(TNo* ptr) {
 	if (ptr != NULL) {
 		pos_ordem(ptr->esq);
@@ -130,7 +139,9 @@ void pos_ordem(TNo* ptr) {
 	}
 }
 
-// Fun��es Padr�es AVL
+// Funções Padrões da AVL
+
+// Insere Os dados na arvore AVL
 void insereAVL(TNo **ptr, TipoAluno item) {
 	if (*ptr == NULL) {
 		(*ptr) = (TNo*)malloc(sizeof(TNo));
@@ -147,27 +158,29 @@ void insereAVL(TNo **ptr, TipoAluno item) {
 		}
 	}
 	// Parte do rotacionamento
-	int FB = altura((*ptr)->dir) - altura((*ptr)->esq);
+	int FB = altura((*ptr)->dir) - altura((*ptr)->esq); // calculo do fator de balanceamento (fb) da raiz da subarvore
 	if (FB == 2) {
-                    int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
-                    if (FBF == 1)
+                    int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq); // calculo do fb  do filho
+                    if (FBF == 1) // rotação simples caso o filho tenha um fb igual a da raiz da subarvore
                             rotacaoEsq(ptr);
-                    else if (FBF == -1) {
+                    else if (FBF == -1) { // rotação dupla caso o filho tenha um fb diferente a da raiz da subarvore
                             rotacaoDir(&(*ptr)->dir);
                             rotacaoEsq(ptr);
                     }
 	}
 	else if (FB == -2) {
-                    int FBF = altura((*ptr)->esq->dir) - altura((*ptr)->esq->esq);
-                    if (FBF == 1) {
+                    int FBF = altura((*ptr)->esq->dir) - altura((*ptr)->esq->esq); // calculo do fb  do filho
+                    if (FBF == 1) { // rotação dupla caso o filho tenha um fb diferente a da raiz da subarvore
                             rotacaoEsq(&(*ptr)->esq);
                             rotacaoDir(ptr);
                     }
-                    else if (FBF == -1) {
+                    else if (FBF == -1) { // rotação simples caso o filho tenha um fb igual a da raiz da subarvore
                             rotacaoDir(ptr);
                     }
 	}
 }
+
+// Retira os elementos da avl
 void retiraAVL(TNo **ptr, TipoAluno *item) {
 	if ((*ptr) == NULL) {
 		printf("\nA chave #%d n�o esta na arvore!", item->RA);
@@ -204,22 +217,23 @@ void retiraAVL(TNo **ptr, TipoAluno *item) {
 	}
 	//Rebalanceamento
 	if ((*ptr) != NULL) {
-		int FB = altura((*ptr)->dir) - altura((*ptr)->esq);
+		int FB = altura((*ptr)->dir) - altura((*ptr)->esq); // calculo do fator de balanceamento (fb) da raiz da subarvore
 		if (FB == 2) {
-				int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq);
-				if (FBF == 1 || FBF == 0)
+				int FBF = altura((*ptr)->dir->dir) - altura((*ptr)->dir->esq); // calculo do fb  do lado aposto da subarvore ao item excluido
+			
+				if (FBF == 1 || FBF == 0) // rotação simples caso o filho analisado tenha um fb igual a zero ou ao fb da raiz da subarvore
 					rotacaoEsq(ptr);
-				else if (FBF == -1) {
+				else if (FBF == -1) { // rotação dupla caso o filho analisado tenha um fb de sinal oposto ao fb da raiz da subarvore
 					rotacaoDir(&(*ptr)->dir);
 					rotacaoEsq(ptr);
 				}
 		}
 		else if (FB == -2) {
-				int FBF = altura((*ptr)->esq->dir) - altura((*ptr)->esq->esq);
-				if (FBF == -1 || FBF == 0) {
+				int FBF = altura((*ptr)->esq->dir) - altura((*ptr)->esq->esq); // calculo do fb  do lado aposto da subarvore ao item excluido
+				if (FBF == -1 || FBF == 0) { // rotação simples caso o filho analisado tenha um fb igual a zero ou ao fb da raiz da subarvore
 					rotacaoDir(ptr);
 				}
-				else if (FBF == 1){
+				else if (FBF == 1){ // rotação dupla caso o filho analisado tenha um fb de sinal oposto ao fb da raiz da subarvore
 					rotacaoEsq(&(*ptr)->esq);
 					rotacaoDir(ptr);
 				}
@@ -227,6 +241,7 @@ void retiraAVL(TNo **ptr, TipoAluno *item) {
 	}
 }
 
+// Calcula a altura da subarvore
 int altura(TNo* ptr) {
 	if (ptr == NULL){
 		return -1;
@@ -240,6 +255,7 @@ int altura(TNo* ptr) {
 	}
 }
 
+// Algoritmo de rotação que rotaciona a subarvore para a direita
 void rotacaoDir(TNo** ptr) {
 	TNo *q, *temp;
 	q = (*ptr)->esq;
@@ -248,6 +264,7 @@ void rotacaoDir(TNo** ptr) {
 	(*ptr)->esq = temp;
 	(*ptr) = q;
 }
+// Algoritmo de rotação que rotaciona a subarvore para a esquerda
 void rotacaoEsq(TNo** ptr) {
 	TNo *q, *temp;
 	q = (*ptr)->dir;

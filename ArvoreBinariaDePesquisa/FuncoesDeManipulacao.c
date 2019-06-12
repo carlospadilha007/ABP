@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "Arvores.h"
 
+// Busca o pai do elemento pesquisado
 void buscaPai(TNo* ptr, TipoAluno item) {
 	TNo* ant = NULL;
 	if (ptr->item.RA == item.RA) {
@@ -28,6 +29,7 @@ else if (item.RA == ptr->item.RA) {
 	system("pause");
 }
 
+// Busca o irmão do elemento pesquisado
 void buscaIrmao(TNo* ptr, TipoAluno item) {
 	TNo* ant = NULL;
 	if (ptr->item.RA == item.RA) {
@@ -75,18 +77,23 @@ void buscaIrmao(TNo* ptr, TipoAluno item) {
 
 }
 
+// Escreve os compos da struct aluno
 void escreveNo(TipoAluno item) {
 		//printf("\nNome: %s\t", item.nome);
 		printf("RA: %d\t", item.RA);
 		//printf("Data de Nascimento: %s\t", item.dataDeNascimento);
 		printf("\n");
 }
+
+// Lê os compos da struct aluno
 void leNo(TipoAluno* item) {
 	fflush(stdin);
 	//printf("\nNome: "); fflush(stdin); scanf("%s", &item->nome);
 	printf("RA: "); fflush(stdin); scanf("%d", &item->RA);
 	//printf("Data de Nascimento: "); fflush(stdin), scanf("%s", &item->dataDeNascimento);
 }
+
+// Menu de exibição
 void exibeMenu() {
 	system("cls");
 	printf("0 - Digite para sair");
@@ -102,6 +109,7 @@ void exibeMenu() {
 	printf("\nSua Op��o: ");
 }
 
+// Menu de impreção
 void subMenu() {
 	system("cls");
 	printf("1 - Imprimir somente ABP");
@@ -110,6 +118,7 @@ void subMenu() {
 	printf("\nDigite sua op��o: ");
 }
 
+// Menu principal
 void menu(TNo** raiz, TNo** raizAVL) {
 	TipoAluno item;
 	int subOp, op = 1, contABP = 0, contAVL = 0;
@@ -235,6 +244,7 @@ void menu(TNo** raiz, TNo** raizAVL) {
 	}
 }
 
+// Enche a arvore com os dados do arquivo
 void encheArvore(TNo **raiz, TNo **raizAVL) {
 	TipoAluno item;
 	FILE* file;
@@ -252,10 +262,13 @@ void encheArvore(TNo **raiz, TNo **raizAVL) {
 	}
 }
 
+// Menu de escolha do sucessor antecessor
 void menuAntecessorSucessor() {
 	printf("\n1 - Utilizar antecessor");
 	printf("\n2 - Utilizar sucessor");
 }
+
+// Função que cria os arquivos
 void criaArquivo() {
 	FILE* file;
 	file = fopen("Entrada.dat", "w");
