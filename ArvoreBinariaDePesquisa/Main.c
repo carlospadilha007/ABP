@@ -9,6 +9,7 @@ int main() {
 	TNo *raiz, *raizAVL;
 	TipoAluno item;
 	int op = 1;
+	//criaArquivo();
 	inicializa(&raiz);
 	inicializa(&raizAVL);
 	encheArvore(&raiz, &raizAVL);

@@ -86,7 +86,9 @@ void sucessor(TNo* q, TNo** r) {
 }
 
 void pesquisa(TNo* ptr, TipoAluno item) {
+	int cont = 0;
 	while ((ptr != NULL) && (ptr->item.RA != item.RA)) {
+		cont++;
 		if (item.RA > ptr->item.RA) {
 			ptr = ptr->dir;
 		}
@@ -100,6 +102,7 @@ void pesquisa(TNo* ptr, TipoAluno item) {
 	else {
 		printf("\nA chave #%d esta na arvore!", item.RA);
 	}
+	printf("\nO numero de comparações feitas foi  %d\n", cont);
 	system("pause");
 }
 

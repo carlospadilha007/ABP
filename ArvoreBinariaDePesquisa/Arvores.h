@@ -26,6 +26,7 @@ void menu(TNo** raiz, TNo** raizAVL);
 void subMenu();
 void encheArvore(TNo** raiz, TNo** raizAVL);
 void menuAntecessorSucessor();
+void criaArquivo();
 
 //Funções Padrão
 void inicializa(TNo** ptr);

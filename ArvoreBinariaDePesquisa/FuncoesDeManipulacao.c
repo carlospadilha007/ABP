@@ -112,7 +112,7 @@ void subMenu() {
 
 void menu(TNo** raiz, TNo** raizAVL) {
 	TipoAluno item;
-	int subOp, op = 1;
+	int subOp, op = 1, contABP = 0, contAVL = 0;
 	while (op != 0)
 	{
 		exibeMenu();
@@ -139,7 +139,11 @@ void menu(TNo** raiz, TNo** raizAVL) {
 		case 3: {
 			printf("\nDigite o RA ser pesquisado: ");
 			leNo(&item);
+			printf("\nABP: ");
 			pesquisa(*raiz, item);
+			printf("\nAVL: ");
+			pesquisa(*raizAVL, item);
+			system("pause");
 			break;
 		}
 		case 4: {
@@ -234,6 +238,11 @@ void encheArvore(TNo **raiz, TNo **raizAVL) {
 	TipoAluno item;
 	FILE* file;
 	file = fopen("Entrada.dat", "r");
+	if (file == NULL) {
+		printf("ERRO, o arquivo não pode ser aberto!\n");
+		system("pause");
+		return;
+	}
 	while (!feof(file))
 	{
 		fscanf(file,"%d %s %s", &item.RA, &item.nome, &item.dataDeNascimento);
@@ -245,4 +254,9 @@ void encheArvore(TNo **raiz, TNo **raizAVL) {
 void menuAntecessorSucessor() {
 	printf("\n1 - Utilizar antecessor");
 	printf("\n2 - Utilizar sucessor");
+}
+void criaArquivo() {
+	FILE* file;
+	file = fopen("Entrada.dat", "w");
+	fclose(file);
 }
